@@ -1,7 +1,17 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/AlexSafatli/Saber/rng"
+)
 
 func main() {
-	fmt.Println("Hello, Project Saber")
+	rng.Seed()
+	l := rng.NewLanguage()
+	fmt.Println(l)
+	fmt.Println(l.Phonemes)
+	for i := 0; i < 12; i++ {
+		fmt.Println(l.Name())
+	}
 }
