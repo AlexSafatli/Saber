@@ -9,6 +9,7 @@ import (
 
 func main() {
 	rng.Reseed()
+	rng.InitRandomTables()
 	l := rng.GenerateLanguage()
 	fmt.Println(l)
 	fmt.Println(l.Phonemes)

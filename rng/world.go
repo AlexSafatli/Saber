@@ -15,7 +15,7 @@ const (
 func GenerateWorld(l *Language, complexity uint8) *entities.World {
 	w := entities.NewWorld(l.Name())
 	PopulateWorld(w, l, complexity)
-	GenerateConnections(w)
+	GenerateRegionConnections(w)
 	return w
 }
 
@@ -37,7 +37,7 @@ func PopulateWorld(w *entities.World, l *Language, complexity uint8) {
 	wg.Add(numRegions)
 	w.Regions = make([]entities.Region, numRegions)
 	for i := 0; i < numRegions; i++ {
-		w.Regions[i] = entities.Region{Name: l.Name()}
+		w.Regions[i] = entities.Region{Name: l.Name(), Biome: RandomTableBiomes.Roll()}
 		go PopulateRegion(&w.Regions[i], l, complexity, &wg)
 	}
 	wg.Wait()
@@ -64,12 +64,68 @@ func PopulateRegion(r *entities.Region, l *Language, complexity uint8, wg *sync.
 	wg.Add(numRegions)
 	r.Subregions = make([]entities.Region, numRegions)
 	for i := 0; i < numRegions; i++ {
-		r.Subregions[i] = entities.Region{Name: l.Name()}
+		r.Subregions[i] = entities.Region{Name: l.Name(), Biome: RandomTableBiomes.Roll()}
 		go PopulateRegion(&r.Subregions[i], l, complexity-1, wg)
 	}
 }
 
-func GenerateConnections(w *entities.World) {
-	// use seed object here
-	// https://web.cs.dal.ca/~safatli/blog/?p=239
+// https://web.cs.dal.ca/~safatli/blog/?p=239
+func GenerateRegionConnections(w *entities.World) {
+	var wg sync.WaitGroup
+	wg.Add(len(w.Regions))
+	s := NewSeed()
+	for i := 0; i < len(w.Regions); i++ {
+		for j := i + 1; j < len(w.Regions); j++ {
+			var r uint
+			r = NewSeed()
+			if r < s {
+				s -= SeedReductionAmt
+				if s <= 0 {
+					s = 1
+				}
+				makeRegionConnection(w, i, j)
+			} else {
+				s += SeedIncrementAmt
+				if s > 100 {
+					s = 100
+				}
+			}
+		}
+		go GenerateSubregionConnections(&w.Regions[i], &wg)
+	}
+}
+
+func GenerateSubregionConnections(re *entities.Region, wg *sync.WaitGroup) {
+	defer wg.Done()
+	wg.Add(len(re.Subregions))
+	s := NewSeed()
+	for i := 0; i < len(re.Subregions); i++ {
+		for j := i + 1; j < len(re.Subregions); j++ {
+			var r uint
+			r = NewSeed()
+			if r < s {
+				s -= SeedReductionAmt
+				if s <= 0 {
+					s = 1
+				}
+				makeSubregionConnection(re, i, j)
+			} else {
+				s += SeedIncrementAmt
+				if s > 100 {
+					s = 100
+				}
+			}
+		}
+		go GenerateSubregionConnections(&re.Subregions[i], wg)
+	}
+}
+
+func makeRegionConnection(w *entities.World, i, j int) {
+	w.Regions[i].Connections = append(w.Regions[i].Connections, &w.Regions[j])
+	w.Regions[j].Connections = append(w.Regions[j].Connections, &w.Regions[i])
+}
+
+func makeSubregionConnection(re *entities.Region, i, j int) {
+	re.Subregions[i].Connections = append(re.Subregions[i].Connections, &re.Subregions[j])
+	re.Subregions[j].Connections = append(re.Subregions[j].Connections, &re.Subregions[i])
 }
