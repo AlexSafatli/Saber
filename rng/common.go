@@ -5,6 +5,6 @@ import (
 	"time"
 )
 
-func Seed() {
+func Reseed() {
 	rand.Seed(int64(time.Now().Nanosecond()))
 }
