@@ -1,10 +1,10 @@
 package rng
 
 import (
-  "time"
-  "math/rand"
+	"math/rand"
+	"time"
 )
 
 func Seed() {
-  rand.Seed(int64(time.Now().Nanosecond()))
+	rand.Seed(int64(time.Now().Nanosecond()))
 }

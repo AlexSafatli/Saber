@@ -3,7 +3,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/AlexSafatli/Saber/rng"
+	"./cmd"
+	"./rng"
 )
 
 func main() {
@@ -14,4 +15,5 @@ func main() {
 	for i := 0; i < 12; i++ {
 		fmt.Println(l.Name())
 	}
+	cmd.Execute()
 }
