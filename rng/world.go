@@ -2,12 +2,14 @@ package rng
 
 import (
 	"../entities"
+	"sync"
 )
 
 const (
-	WorldComplexitySimple = 1
-	WorldComplexityNormal = 2
-	WorldComplexityLarge  = 3
+	WorldComplexitySimple     = 1
+	WorldComplexityNormal     = 2
+	WorldComplexityLarge      = 3
+	WorldComplexityExtraLarge = 4
 )
 
 func GenerateWorld(l *Language, complexity uint8) *entities.World {
@@ -27,16 +29,22 @@ func PopulateWorld(w *entities.World, l *Language, complexity uint8) {
 		numRegions = 20
 	case WorldComplexityLarge:
 		numRegions = 75
+	case WorldComplexityExtraLarge:
+		numRegions = 150
 	}
 
+	var wg sync.WaitGroup
+	wg.Add(numRegions)
 	w.Regions = make([]entities.Region, numRegions)
 	for i := 0; i < numRegions; i++ {
 		w.Regions[i] = entities.Region{Name: l.Name()}
-		PopulateRegion(w.Regions[i], l, complexity-1)
+		go PopulateRegion(&w.Regions[i], l, complexity, &wg)
 	}
+	wg.Wait()
 }
 
-func PopulateRegion(r entities.Region, l *Language, complexity uint8) {
+func PopulateRegion(r *entities.Region, l *Language, complexity uint8, wg *sync.WaitGroup) {
+	defer wg.Done()
 	if complexity == 0 {
 		return
 	}
@@ -46,15 +54,18 @@ func PopulateRegion(r entities.Region, l *Language, complexity uint8) {
 	case WorldComplexitySimple:
 		numRegions = 3
 	case WorldComplexityNormal:
-		numRegions = 10
+		numRegions = 7
 	case WorldComplexityLarge:
-		numRegions = 25
+		numRegions = 16
+	case WorldComplexityExtraLarge:
+		numRegions = 64
 	}
 
+	wg.Add(numRegions)
 	r.Subregions = make([]entities.Region, numRegions)
 	for i := 0; i < numRegions; i++ {
 		r.Subregions[i] = entities.Region{Name: l.Name()}
-		PopulateRegion(r.Subregions[i], l, complexity-1)
+		go PopulateRegion(&r.Subregions[i], l, complexity-1, wg)
 	}
 }
 

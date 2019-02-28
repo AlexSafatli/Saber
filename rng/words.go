@@ -21,13 +21,13 @@ type Language struct {
 
 var (
 	SyllableStructures = []string{"CV", "VC"}
-	ConsonantPresets = []string{"ptkbdgmnlrsqxʧ", "pbgdzklmnrstʤ",
+	ConsonantPresets   = []string{"ptkbdgmnlrsqxʧ", "pbgdzklmnrstʤ",
 		"pbgdzklmnrstv"}
 	VowelPresets = []string{"aeiou", "aeio", "aeou"}
 	FinalPresets = []string{"mnsk", "mnŋsk", "mnʃsk"}
 	Orthography  = map[string]string{"ʃ": "sh", "ʧ": "ch",
 		"ʤ": "j", "ŋ": "ng", "x": "kh", "ɣ": "gh"}
-		Alphabet   = "abcdefghijklmnopqrstuvwxyz"
+	Alphabet = "abcdefghijklmnopqrstuvwxyz"
 )
 
 func (p *Phonemes) Type(r rune) string {
@@ -68,7 +68,7 @@ func (l *Language) Syllable() string {
 func (l *Language) Word() string {
 	var buf bytes.Buffer
 	var a, b int
-	diff := int(l.MaxSyllables-l.MinSyllables)
+	diff := int(l.MaxSyllables - l.MinSyllables)
 	min := int(l.MinSyllables)
 	if diff > 0 {
 		a = rand.Intn(diff + 1)
@@ -87,18 +87,18 @@ func (l *Language) Name() string {
 	return capitalize(l.Word())
 }
 
-func NewLanguage() *Language {
+func GenerateLanguage() *Language {
 	minSyl := int8(rand.Intn(2) + 2)
 	p := &Phonemes{
 		Consonants: choose(ConsonantPresets),
-		Vowels: choose(VowelPresets),
-		Finals: choose(FinalPresets),
+		Vowels:     choose(VowelPresets),
+		Finals:     choose(FinalPresets),
 	}
 	return &Language{
-		Phonemes: p,
+		Phonemes:     p,
 		Structure:    choose(SyllableStructures),
 		MinSyllables: minSyl,
-		MaxSyllables: int8(rand.Intn(2) + 1) + minSyl,
+		MaxSyllables: int8(rand.Intn(2)+1) + minSyl,
 	}
 }
 

@@ -8,8 +8,8 @@ import (
 )
 
 func main() {
-	rng.Seed()
-	l := rng.NewLanguage()
+	rng.Reseed()
+	l := rng.GenerateLanguage()
 	fmt.Println(l)
 	fmt.Println(l.Phonemes)
 	for i := 0; i < 12; i++ {
