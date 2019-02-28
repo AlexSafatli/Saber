@@ -8,13 +8,9 @@ import (
 	"strings"
 )
 
-const (
-	RandomTablePathBiomes = "./tables/biomes.txt"
-)
+const ()
 
-var (
-	RandomTableBiomes *RandomTable
-)
+var ()
 
 type RandomTable struct {
 	Values map[int]string
@@ -85,9 +81,5 @@ func (r *RandomTable) Parse(path string) error {
 }
 
 func InitRandomTables() {
-	var err error
-	RandomTableBiomes, err = NewRandomTable(RandomTablePathBiomes)
-	if err != nil {
-		panic(err)
-	}
+	//var err error
 }

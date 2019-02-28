@@ -1,28 +1,96 @@
 package entities
 
+import (
+	"../perm"
+)
+
 type World struct {
-	Name    string
+	Location
 	Regions []Region
 }
 
 type Region struct {
-	Name        string
-	Biome       string
+	Location
 	Connections []*Region
 	Subregions  []Region
 }
 
 type Settlement struct {
-	Name      string
+	Location
 	Size      uint8
 	Locations []Location
 }
 
 type Location struct {
 	Name string
+	Tags []string
 	Type uint8
 }
 
+const (
+	LocationTypeWorld      = 0
+	LocationTypeContinent  = 1
+	LocationTypeCountry    = 2
+	LocationTypeProvince   = 3
+	LocationTypeCity       = 4
+	LocationTypeTown       = 5
+	LocationTypeVillage    = 6
+	LocationTypeHamlet     = 7
+	LocationTypeThorp      = 8
+	LocationTypeTownCenter = 9
+	LocationTypeUnit       = 10
+)
+
+var (
+	LargeLocationTypes         = []uint8{LocationTypeContinent, LocationTypeCountry, LocationTypeProvince}
+	CityLocationTypes          = []uint8{LocationTypeCity, LocationTypeTown, LocationTypeVillage, LocationTypeHamlet, LocationTypeThorp}
+	LocalLocationTypes         = []uint8{LocationTypeTownCenter, LocationTypeUnit}
+	SmallestLocationType uint8 = LocationTypeUnit
+)
+
+func (r *Region) IsLargeLocation() bool {
+	return contains(r.Type, LargeLocationTypes)
+}
+
 func NewWorld(name string) *World {
-	return &World{Name: name}
+	return &World{Location: Location{
+		Name: name,
+		Type: LocationTypeWorld,
+	}}
+}
+
+func MakeRegion(name string, locType uint8) Region {
+	return Region{Location: Location{
+		Name: name,
+		Type: locType,
+	}}
+}
+
+func GenerateLargeLocationType() uint8 {
+	return perm.ChooseUint8(LargeLocationTypes)
+}
+
+func GenerateCityLocationType() uint8 {
+	return perm.ChooseUint8(CityLocationTypes)
+}
+
+func GenerateLocalLocationType() uint8 {
+	return perm.ChooseUint8(LocalLocationTypes)
+}
+
+func NextSmallestLocationType(locType uint8) uint8 {
+	if locType >= SmallestLocationType {
+		return SmallestLocationType
+	} else {
+		return locType + 1
+	}
+}
+
+func contains(v uint8, a []uint8) bool {
+	for _, u := range a {
+		if u == v {
+			return true
+		}
+	}
+	return false
 }

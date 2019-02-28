@@ -1,9 +1,0 @@
-0 10 TropicalRainforest
-10 20 Marsh
-20 25 Arctic
-25 30 Tundra
-30 32 Scorched
-32 40 TemperateDesert
-40 60 Grassland
-60 80 Forest
-80 100 Plains

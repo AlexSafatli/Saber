@@ -37,7 +37,7 @@ func PopulateWorld(w *entities.World, l *Language, complexity uint8) {
 	wg.Add(numRegions)
 	w.Regions = make([]entities.Region, numRegions)
 	for i := 0; i < numRegions; i++ {
-		w.Regions[i] = entities.Region{Name: l.Name(), Biome: RandomTableBiomes.Roll()}
+		w.Regions[i] = entities.MakeRegion(l.Name(), entities.GenerateLargeLocationType())
 		go PopulateRegion(&w.Regions[i], l, complexity, &wg)
 	}
 	wg.Wait()
@@ -64,7 +64,13 @@ func PopulateRegion(r *entities.Region, l *Language, complexity uint8, wg *sync.
 	wg.Add(numRegions)
 	r.Subregions = make([]entities.Region, numRegions)
 	for i := 0; i < numRegions; i++ {
-		r.Subregions[i] = entities.Region{Name: l.Name(), Biome: RandomTableBiomes.Roll()}
+		var locationType uint8
+		if r.IsLargeLocation() {
+			locationType = entities.GenerateCityLocationType()
+		} else {
+			locationType = entities.NextSmallestLocationType(r.Type)
+		}
+		r.Subregions[i] = entities.MakeRegion(l.Name(), locationType)
 		go PopulateRegion(&r.Subregions[i], l, complexity-1, wg)
 	}
 }
