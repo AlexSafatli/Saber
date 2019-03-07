@@ -69,10 +69,10 @@ func (r *RandomTable) Parse(path string) error {
 		if err != nil || rollMax < 0 {
 			continue
 		}
-		value := fields[2]
+		valueIndex := strings.Index(s, fields[2])
 		r.min = min(r.min, rollMin)
 		r.max = max(r.max, rollMax)
-		r.Values[rollMin] = value
+		r.Values[rollMin] = s[valueIndex:]
 	}
 	if err = scanner.Err(); err != nil {
 		return err

@@ -1,0 +1,48 @@
+0 1 Apothecary
+1 2 Hedge Wizard
+2 3 Herbalist
+3 4 Potioneer
+4 5 Poisonmaker
+5 6 Bounty Hunter
+6 7 Poacher
+7 8 Slaver
+8 9 Thief
+9 12 Constable
+12 13 Sheriff
+13 14 Magistrate
+14 15 Knight, Noble
+15 16 Lord, Young
+16 17 Lord, Elder
+17 18 Lady, Young
+18 19 Lady, Elder
+19 20 Wealthy Merchant
+20 21 Acolyte, Priest
+21 22 Healer, Priest
+22 23 Monk
+23 24 Preacher
+24 26 Scholar
+26 27 Inquisitor, Witch Hunter
+27 28 Psychic, Seer
+28 29 Astrologer, Seer
+29 30 Exile, Traveler
+30 31 Minstrel
+31 32 Peddler
+32 33 Refugee
+33 34 Sellsword, Traveler
+34 35 Storyteller
+35 36 Bard
+36 37 Treasure Hunter, Traveler
+37 38 Barmaid
+38 39 Barkeep
+39 40 Innkeeper
+40 41 Farmer
+41 42 Fisherman
+42 43 Ferryman
+43 44 Woodsman
+44 48 Artisan
+48 49 Actor
+49 50 Politician, Noble
+50 51 Courtier
+51 52 Barrister
+52 53 Cartographer
+53 54 Diplomat, Traveler
