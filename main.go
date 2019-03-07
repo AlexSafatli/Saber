@@ -4,13 +4,13 @@ import (
 	"fmt"
 
 	"./cmd"
-	"./rng"
+	"./gen"
 )
 
 func main() {
-	rng.Reseed()
-	rng.InitRandomTables()
-	l := rng.GenerateLanguage()
+	gen.Reseed()
+	gen.InitRandomTables()
+	l := gen.GenerateLanguage()
 	fmt.Println(l)
 	fmt.Println(l.Phonemes)
 	for i := 0; i < 12; i++ {

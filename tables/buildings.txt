@@ -1,0 +1,5 @@
+0 1 Castle
+1 2 Keep
+2 3 Inn
+3 4 Tavern
+4 5 Barracks

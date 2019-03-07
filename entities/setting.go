@@ -1,7 +1,7 @@
 package entities
 
 import (
-	"../perm"
+	"../rng"
 )
 
 type World struct {
@@ -28,23 +28,23 @@ type Location struct {
 }
 
 const (
-	LocationTypeWorld      = 0
-	LocationTypeContinent  = 1
-	LocationTypeCountry    = 2
-	LocationTypeProvince   = 3
-	LocationTypeCity       = 4
-	LocationTypeTown       = 5
-	LocationTypeVillage    = 6
-	LocationTypeHamlet     = 7
-	LocationTypeThorp      = 8
-	LocationTypeTownCenter = 9
-	LocationTypeUnit       = 10
+	LocationTypeWorld     = 0
+	LocationTypeContinent = 1
+	LocationTypeCountry   = 2
+	LocationTypeProvince  = 3
+	LocationTypeCity      = 4
+	LocationTypeTown      = 5
+	LocationTypeVillage   = 6
+	LocationTypeHamlet    = 7
+	LocationTypeThorp     = 8
+	LocationTypeDistrict  = 9
+	LocationTypeUnit      = 10
 )
 
 var (
 	LargeLocationTypes         = []uint8{LocationTypeContinent, LocationTypeCountry, LocationTypeProvince}
 	CityLocationTypes          = []uint8{LocationTypeCity, LocationTypeTown, LocationTypeVillage, LocationTypeHamlet, LocationTypeThorp}
-	LocalLocationTypes         = []uint8{LocationTypeTownCenter, LocationTypeUnit}
+	LocalLocationTypes         = []uint8{LocationTypeDistrict, LocationTypeUnit}
 	SmallestLocationType uint8 = LocationTypeUnit
 )
 
@@ -67,15 +67,15 @@ func MakeRegion(name string, locType uint8) Region {
 }
 
 func GenerateLargeLocationType() uint8 {
-	return perm.ChooseUint8(LargeLocationTypes)
+	return rng.ChooseUint8(LargeLocationTypes)
 }
 
 func GenerateCityLocationType() uint8 {
-	return perm.ChooseUint8(CityLocationTypes)
+	return rng.ChooseUint8(CityLocationTypes)
 }
 
 func GenerateLocalLocationType() uint8 {
-	return perm.ChooseUint8(LocalLocationTypes)
+	return rng.ChooseUint8(LocalLocationTypes)
 }
 
 func NextSmallestLocationType(locType uint8) uint8 {

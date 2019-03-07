@@ -1,4 +1,4 @@
-package perm
+package rng
 
 import "math/rand"
 

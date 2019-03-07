@@ -1,7 +1,7 @@
-package rng
+package gen
 
 import (
-	"../perm"
+	"../rng"
 	"bytes"
 	"math/rand"
 	"strings"
@@ -61,7 +61,7 @@ func (l *Language) Syllable() string {
 	var syl string
 	for _, r := range l.Structure {
 		pType := l.Phonemes.Type(r)
-		syl += string(perm.ChooseRune(pType))
+		syl += string(rng.ChooseRune(pType))
 	}
 	return l.spell(syl)
 }
@@ -91,13 +91,13 @@ func (l *Language) Name() string {
 func GenerateLanguage() *Language {
 	minSyl := int8(rand.Intn(2) + 2)
 	p := &Phonemes{
-		Consonants: perm.Choose(ConsonantPresets),
-		Vowels:     perm.Choose(VowelPresets),
-		Finals:     perm.Choose(FinalPresets),
+		Consonants: rng.Choose(ConsonantPresets),
+		Vowels:     rng.Choose(VowelPresets),
+		Finals:     rng.Choose(FinalPresets),
 	}
 	return &Language{
 		Phonemes:     p,
-		Structure:    perm.Choose(SyllableStructures),
+		Structure:    rng.Choose(SyllableStructures),
 		MinSyllables: minSyl,
 		MaxSyllables: int8(rand.Intn(2)+1) + minSyl,
 	}

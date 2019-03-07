@@ -1,4 +1,4 @@
-package rng
+package gen
 
 import (
 	"bufio"
