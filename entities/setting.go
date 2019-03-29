@@ -23,7 +23,7 @@ type Settlement struct {
 
 type Location struct {
 	Name string
-	Tags []string
+	Tags []EntityTag
 	Type uint8
 }
 

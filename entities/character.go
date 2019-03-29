@@ -3,5 +3,5 @@ package entities
 type Character struct {
 	Name            string
 	Profession      string
-	Characteristics map[string]string
+	Characteristics map[string]EntityTag
 }
