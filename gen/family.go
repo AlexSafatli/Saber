@@ -5,7 +5,8 @@ import (
 )
 
 type Family struct {
-	Locale   *entities.Region
+	Surname  string
+	Origin   *entities.Region
 	Language *Language
 }
 
