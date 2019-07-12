@@ -2,14 +2,14 @@ package rng
 
 import "math/rand"
 
-func Shuffle(a *[]interface{}) {
+func ShuffleSlice(a *[]interface{}) {
 	for i := range *a {
 		j := rand.Intn(i + 1)
 		(*a)[i], (*a)[j] = (*a)[j], (*a)[i]
 	}
 }
 
-func Shuffled(a []interface{}) []interface{} {
+func ShuffledSlice(a []interface{}) []interface{} {
 	b := make([]interface{}, len(a))
 	p := rand.Perm(len(a))
 	for i, v := range p {
