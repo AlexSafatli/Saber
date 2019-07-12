@@ -1,20 +1,22 @@
 package main
 
 import (
-	"fmt"
-
 	"./cmd"
 	"./gen"
+	"fmt"
+	"github.com/spf13/viper"
 )
 
+func readConfig() {
+	viper.SetConfigName("config")
+	if err := viper.ReadInConfig(); err != nil {
+		panic(fmt.Errorf("Fatal error config file: %s \n", err))
+	}
+}
+
 func main() {
+	readConfig()
 	gen.Reseed()
 	gen.InitRandomTables()
-	l := gen.GenerateLanguage()
-	fmt.Println(l)
-	fmt.Println(l.Phonemes)
-	for i := 0; i < 12; i++ {
-		fmt.Println(l.Name())
-	}
 	cmd.Execute()
 }
