@@ -19,6 +19,7 @@ func GenerateWorld(l *Language, complexity uint8) *entities.World {
 	return w
 }
 
+// TODO refactor this to use different languages for different regions OR genetically change
 func PopulateWorld(w *entities.World, l *Language, complexity uint8) {
 	var numRegions = 0
 
