@@ -5,5 +5,7 @@ import (
 )
 
 func GenerateCharacter(l *Language, gender string) *entities.Character {
-	return entities.NewCharacter(l.Name(), gender)
+	char := entities.NewCharacter(l.Name(), gender)
+	char.Profession = TableProfessions.Roll()
+	return char
 }

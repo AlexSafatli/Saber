@@ -4,13 +4,21 @@ import (
 	"bufio"
 	"math/rand"
 	"os"
+	"path/filepath"
 	"strconv"
 	"strings"
 )
 
-const ()
+const (
+	TablesPath               = "tables"
+	TableProfessionsFileName = "professions.txt"
+	TableBuildingsFileName   = "buildings.txt"
+)
 
-var ()
+var (
+	TableProfessions RandomTable
+	TableBuildings   RandomTable
+)
 
 type RandomTable struct {
 	Values map[int]string
@@ -18,10 +26,10 @@ type RandomTable struct {
 	max    int
 }
 
-func NewRandomTable(path string) (*RandomTable, error) {
-	r := &RandomTable{}
+func NewRandomTable(path string) (RandomTable, error) {
+	r := RandomTable{}
 	if err := r.Parse(path); err != nil {
-		return nil, err
+		return r, err
 	}
 	return r, nil
 }
@@ -80,6 +88,16 @@ func (r *RandomTable) Parse(path string) error {
 	return nil
 }
 
+func randomTablePath(fileName string) string {
+	return filepath.Join(TablesPath, fileName)
+}
+
 func InitRandomTables() {
-	//var err error
+	var err error
+	if TableProfessions, err = NewRandomTable(randomTablePath(TableProfessionsFileName)); err != nil {
+		panic(err)
+	}
+	if TableBuildings, err = NewRandomTable(randomTablePath(TableBuildingsFileName)); err != nil {
+		panic(err)
+	}
 }

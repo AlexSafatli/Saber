@@ -43,7 +43,8 @@ func printTreeNode(node *gen.FamilyTreeNode, level uint) {
 		tabs += "\t"
 		i++
 	}
-	fmt.Printf("%s%s with %d children\n", tabs, node.Character.Name, len(node.Children))
+	fmt.Printf("%s%s (%s) with %d children\n", tabs, node.Character.Name,
+		node.Character.Profession, len(node.Children))
 	for _, child := range node.Children {
 		printTreeNode(child, level+1)
 	}
