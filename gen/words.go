@@ -7,6 +7,8 @@ import (
 	"strings"
 )
 
+// Adapted from https://worldbuildingworkshop.com/constructing-languages/
+
 type Phonemes struct {
 	Consonants string
 	Vowels     string

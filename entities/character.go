@@ -1,11 +1,12 @@
 package entities
 
 type Character struct {
+	ID              uint
 	Name            string
 	Race            string
 	Profession      string
 	Gender          string
-	Characteristics map[string]EntityTag
+	Characteristics map[string]EntityTag `json:"-"`
 	Level           uint64
 	GenerationDelta int  `json:"Generation Delta"`
 	YOBDelta        int  `json:"Year of Birth Delta"`

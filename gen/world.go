@@ -76,7 +76,6 @@ func PopulateRegion(r *entities.Region, l *Language, complexity uint8, wg *sync.
 	}
 }
 
-// https://web.cs.dal.ca/~safatli/blog/?p=239
 func GenerateRegionConnections(w *entities.World) {
 	var wg sync.WaitGroup
 	wg.Add(len(w.Regions))

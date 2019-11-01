@@ -14,7 +14,8 @@ func Reseed() {
 	rand.Seed(int64(time.Now().Nanosecond()))
 }
 
-func NewSeed() uint { // Seed object; see docs
+// https://web.cs.dal.ca/~safatli/blog/?p=239
+func NewSeed() uint {
 	return uint(rand.Int63n(100) << 1 >> 1)
 }
 
