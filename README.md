@@ -2,7 +2,14 @@
 
 An efficient Go library for dungeon mastering (DMing) tabletop games designed to be system-agnostic. Will be extended to multiple CLIs in other projects such as [for D&D 5E](https://github.com/AlexSafatli/airtable-dnd).
 
-## Features
+## Current Features
+
+ - Character generation
+ - World/region generation
+ - Language generation
+ - Family tree generation
+
+## Planned Features
 
 - Manage campaigns and store history of commands as a set of command 
   **transactions** (actions will be *journaled*, locally or remotely).
