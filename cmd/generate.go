@@ -40,7 +40,7 @@ func printTreeNode(node *gen.FamilyTreeNode, level uint) {
 	var tabs = ""
 	var i uint = 0
 	for i < level {
-		tabs += "\t"
+		tabs += "\t" // TODO string builder
 		i++
 	}
 	fmt.Printf("%s%s (%s) with %d children\n", tabs, node.Character.Name,

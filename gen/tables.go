@@ -2,11 +2,13 @@ package gen
 
 import (
 	"bufio"
+	"bytes"
 	"math/rand"
 	"os"
 	"path/filepath"
 	"strconv"
 	"strings"
+	"text/template"
 )
 
 const (
@@ -16,11 +18,13 @@ const (
 )
 
 var (
+	Tables           = []*RandomTable{&TableProfessions, &TableBuildings}
 	TableProfessions RandomTable
 	TableBuildings   RandomTable
 )
 
 type RandomTable struct {
+	Name   string
 	Values map[int]string
 	min    int
 	max    int
@@ -60,11 +64,16 @@ func (r *RandomTable) Parse(path string) error {
 			panic(err)
 		}
 	}()
+	base := filepath.Base(path)
+	r.Name = base[0 : len(base)-len(filepath.Ext(path))]
 	r.Values = make(map[int]string)
 	scanner := bufio.NewScanner(f)
 	for scanner.Scan() {
 		// Parse table data.
 		s := scanner.Text()
+		if strings.HasPrefix(s, "//") {
+			continue // comment
+		}
 		fields := strings.Fields(s)
 		if len(fields) < 3 {
 			continue
@@ -80,7 +89,7 @@ func (r *RandomTable) Parse(path string) error {
 		valueIndex := strings.Index(s, fields[2])
 		r.min = min(r.min, rollMin)
 		r.max = max(r.max, rollMax)
-		r.Values[rollMin] = s[valueIndex:]
+		r.Values[rollMin] = formatRandomTableString(s[valueIndex:])
 	}
 	if err = scanner.Err(); err != nil {
 		return err
@@ -88,8 +97,35 @@ func (r *RandomTable) Parse(path string) error {
 	return nil
 }
 
+func rollAllTables() map[string]string {
+	m := make(map[string]string)
+	for _, table := range Tables {
+		m[table.Name] = table.Roll()
+	}
+	return m
+}
+
+func formatRandomTableString(s string) string {
+	buf := bytes.Buffer{}
+	t := template.Must(template.New("").Parse(s))
+	if err := t.Execute(&buf, rollAllTables()); err != nil {
+		panic(err)
+	}
+	return buf.String()
+}
+
 func randomTablePath(fileName string) string {
 	return filepath.Join(TablesPath, fileName)
+}
+
+func randomTableByName(tableName string) *RandomTable {
+	switch strings.ToLower(tableName) {
+	case "professions":
+		return &TableProfessions
+	case "buildings":
+		return &TableBuildings
+	}
+	return nil
 }
 
 func InitRandomTables() {
