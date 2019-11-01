@@ -15,7 +15,9 @@ var rootCmd = &cobra.Command{
 }
 
 func Execute() {
-	rootCmd.AddCommand(genWorldCmd)
+	genRootCmd.AddCommand(genWorldCmd)
+	genRootCmd.AddCommand(genFamilyCmd)
+	rootCmd.AddCommand(genRootCmd)
 	if err := rootCmd.Execute(); err != nil {
 		fmt.Println(err)
 		os.Exit(1)
