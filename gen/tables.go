@@ -100,7 +100,9 @@ func (r *RandomTable) Parse(path string) error {
 func rollAllTables() map[string]string {
 	m := make(map[string]string)
 	for _, table := range Tables {
-		m[table.Name] = table.Roll()
+		if table != nil {
+			m[table.Name] = table.Roll()
+		}
 	}
 	return m
 }
@@ -109,23 +111,13 @@ func formatRandomTableString(s string) string {
 	buf := bytes.Buffer{}
 	t := template.Must(template.New("").Parse(s))
 	if err := t.Execute(&buf, rollAllTables()); err != nil {
-		panic(err)
+		return s
 	}
 	return buf.String()
 }
 
 func randomTablePath(fileName string) string {
 	return filepath.Join(TablesPath, fileName)
-}
-
-func randomTableByName(tableName string) *RandomTable {
-	switch strings.ToLower(tableName) {
-	case "professions":
-		return &TableProfessions
-	case "buildings":
-		return &TableBuildings
-	}
-	return nil
 }
 
 func InitRandomTables() {

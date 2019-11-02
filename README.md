@@ -44,6 +44,10 @@ An efficient Go library for dungeon mastering (DMing) tabletop games designed to
 
 ## Further Reading
 
+### Related Articles
+
+### References
+
 [1] https://www.reddit.com/r/DnD/comments/452r6r/a_massive_and_growing_resource_of_random_tables/
 
 [2] http://redbeardsravings.blogspot.ca/2011/08/faction-connections-in-megadungeon.html

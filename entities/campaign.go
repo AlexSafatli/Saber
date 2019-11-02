@@ -1,8 +1,8 @@
 package entities
 
 type Campaign struct {
-	Name       string
-	DM         string
-	Characters []*Character
-	World      *World
+	Name             string
+	DM               string
+	PlayerCharacters []*Character
+	World            *World
 }

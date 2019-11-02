@@ -14,8 +14,13 @@ type Character struct {
 	MotherID        uint `json:"Mother ID"`
 	FatherID        uint `json:"Father ID"`
 	LocationID      uint `json:"Location ID"`
+	PC              bool `json:"-"`
 }
 
+const (
+	CharacterRaceDefault = "Human"
+)
+
 func NewCharacter(name, gender string) *Character {
-	return &Character{Name: name, Gender: gender}
+	return &Character{Name: name, Gender: gender, Race: CharacterRaceDefault}
 }

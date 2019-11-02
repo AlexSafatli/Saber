@@ -98,10 +98,7 @@ func GenerateFamilyTree(f *Family, w *entities.World, numStartingChildren int) *
 	tree.Root.Children = make([]*FamilyTreeNode, numStartingChildren)
 	for i := 0; i < numStartingChildren; i++ {
 		tree.Root.Children[i] = generateFamilyTreeNode(f, RandomGender())
-		if rng.RandomBoolean() {
-			// 50% chance they have a spouse
-			tree.Root.Children[i].GenerateSpouse(w)
-		}
+		tree.Root.Children[i].GenerateSpouse(w)
 		go PopulateFamilyTree(tree.Root.Children[i], w, &wg)
 	}
 	wg.Wait()
