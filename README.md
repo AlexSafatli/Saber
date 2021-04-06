@@ -16,6 +16,8 @@ An efficient Go library for dungeon mastering (DMing) tabletop games designed to
 - Roll dice in different string formats.
 - Create random PCs/NPCs with skeleton backgrounds, personality, and 
   strengths/weaknesses (**character generation** with *tagging*).
+  - Complex characteristic and tag generation using editable tables found in files (see `tables`).
+  - Will list relative attributes in a system-agnostic fashion (but use typical archetypical features such as Strength and Charisma).
 - Create random locations and populations (e.g., cities, countries, regions) with placed 
   NPCs (**setting generation** with *tagging*).
 - Create random rumours, adventure hooks, and roll on any customizable random 
