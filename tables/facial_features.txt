@@ -1,0 +1,20 @@
+// http://angband.oook.cz/steamband/CharacterTraits.pdf
+0 1 Acne
+1 4 Beard
+4 5 Buck-toothed
+5 7 Bushy eyebrows
+7 9 Chiseled
+9 10 Doe-eyed
+10 11 Distinctive nose
+11 12 Gap-toothed
+12 15 Goatee
+15 16 Grizzled
+16 17 Missing ear
+17 18 Missing eye
+18 19 Missing teeth
+19 20 Moustache
+20 21 Pierced
+21 22 Sideburns
+22 23 Squinty
+23 24 Stained teeth
+24 25 Weather-beaten
