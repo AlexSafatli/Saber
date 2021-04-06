@@ -1,0 +1,21 @@
+// http://angband.oook.cz/steamband/CharacterTraits.pdf
+0 1 Accented
+1 2 Breathless
+2 4 Crisp
+4 5 Fast
+5 6 Guttural
+6 7 Halting
+7 8 Husky
+8 9 Lisps
+9 10 Low-pitched
+10 11 Loud
+11 12 Nasal
+12 13 Nervous
+13 14 Raspy
+14 15 Slow
+15 16 Slurs
+16 17 Squeaky
+17 18 Stutters
+18 19 Wheezy
+19 20 Whiny
+20 21 Whispery
