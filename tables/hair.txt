@@ -1,0 +1,21 @@
+// http://angband.oook.cz/steamband/CharacterTraits.pdf
+1 3 Bald
+3 5 Braided
+5 8 Curly
+8 9 Dreadlocks
+9 10 Frazzled
+10 11 Greasy
+11 12 Limp
+12 16 Long
+16 19 Messy
+19 20 Strange hairstyle
+20 23 Pony-tail
+23 26 Short
+26 30 Straight
+30 31 Streaked
+31 32 Thick
+32 33 Thinning
+33 34 Very long
+34 35 Waist-length
+35 37 Wavy
+37 39 Well-groomed
