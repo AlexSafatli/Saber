@@ -3,3 +3,8 @@
 2 3 Inn
 3 4 Tavern
 4 5 Barracks
+5 6 Temple
+6 7 Granary
+7 8 Windmill
+8 9 Tower
+9 10 Farmhouse
