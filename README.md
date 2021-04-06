@@ -48,6 +48,8 @@ An efficient Go library with minimal CLI for dungeon mastering (DMing) tabletop 
 
 ### Related Articles
 
+- https://www.reddit.com/r/Pathfinder_RPG/comments/2t8xwu/compilation_of_random_character_creation_tables/
+
 ### References
 
 [1] https://www.reddit.com/r/DnD/comments/452r6r/a_massive_and_growing_resource_of_random_tables/
