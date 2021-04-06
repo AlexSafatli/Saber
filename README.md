@@ -1,6 +1,6 @@
 # Saber
 
-An efficient Go library for dungeon mastering (DMing) tabletop games designed to be system-agnostic. Will be extended to multiple CLIs in other projects such as [for D&D 5E](https://github.com/AlexSafatli/airtable-dnd).
+An efficient Go library with minimal CLI for dungeon mastering (DMing) tabletop games designed to be system-agnostic. Will be extended to multiple CLIs in other projects such as [for D&D 5E](https://github.com/AlexSafatli/airtable-dnd).
 
 ## Current Features
 
