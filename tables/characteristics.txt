@@ -1,0 +1,64 @@
+0 1 Birthmark ({location})
+1 2 Body piercing ({location})
+2 3 Scarred ({location})
+3 4 Tattooed ({location})
+4 5 Punctual
+5 6 Tends to arrive late
+6 7 Tends to give vague answers
+7 8 Plays with hands
+8 9 Flamboyant
+9 10 Strong body odor
+10 11 Annoying laugh
+11 12 Bad with money
+12 13 Bites fingernails
+13 14 Bites lips
+14 15 Black eye
+15 16 Bleeding nose
+16 17 Blinks constantly
+17 18 Burn scar ({location})
+18 19 Clicks tongue
+19 20 Cracks knuckles
+20 21 Dandruff
+21 22 Rambles
+22 23 Dirty
+23 24 Exaggerates often
+24 25 Fidgets
+25 26 Finshes others' sentences
+26 27 Hates animals
+27 28 Hates children
+28 29 Interrupts others
+29 30 Lazy-eyed
+30 31 Limps
+31 32 Loves children
+32 33 Mispronounces names
+33 34 Missing finger
+34 35 Mutters
+35 36 Paces often
+36 37 Perfumed
+37 38 Picks nose
+38 39 Picks at teeth
+39 40 Plays with hair
+40 41 Taps others
+41 42 Prefers to be called by last name
+42 43 Reads constantly
+43 44 Repeats same phrase over and over
+44 45 Sleeps late
+45 46 Sleeps nude
+46 47 Sneers
+47 48 Spits
+48 49 Stands very close
+49 50 Stares
+50 51 Swears often
+51 52 Sweaty
+52 53 Talks to self
+53 54 Thinks they are very lucky
+54 55 Tone-deaf
+55 56 Unable to remember names
+56 57 Drools
+57 58 Excessively clean
+58 59 Hydrophobic
+59 60 Insomniac
+60 61 Habitual liar
+61 62 Addict ({substance})
+62 63 Obsessive gambler
+63 64 Short attention span
