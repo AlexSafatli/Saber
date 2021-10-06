@@ -1,8 +1,8 @@
 package main
 
 import (
-	"./cmd"
-	"./gen"
+	"github.com/AlexSafatli/Saber/cmd"
+	"github.com/AlexSafatli/Saber/gen"
 )
 
 func main() {
