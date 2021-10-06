@@ -1,7 +1,7 @@
 package gen
 
 import (
-	"../entities"
+	"github.com/AlexSafatli/Saber/entities"
 	"sync"
 )
 

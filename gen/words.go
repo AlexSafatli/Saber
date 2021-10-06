@@ -1,13 +1,13 @@
 package gen
 
 import (
-	"../rng"
 	"bytes"
+	"github.com/AlexSafatli/Saber/rng"
 	"math/rand"
 	"strings"
 )
 
-// Adapted from https://worldbuildingworkshop.com/constructing-languages/
+// Phonemes - https://worldbuildingworkshop.com/constructing-languages/
 type Phonemes struct {
 	Consonants string
 	Vowels     string

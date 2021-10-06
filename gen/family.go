@@ -1,8 +1,8 @@
 package gen
 
 import (
-	"../entities"
-	"../rng"
+	"github.com/AlexSafatli/Saber/entities"
+	"github.com/AlexSafatli/Saber/rng"
 	"sync"
 )
 

@@ -1,7 +1,7 @@
 package gen
 
 import (
-	"../entities"
+	"github.com/AlexSafatli/Saber/entities"
 )
 
 func GenerateCharacter(l *Language, gender string) *entities.Character {

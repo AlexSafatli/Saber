@@ -1,7 +1,7 @@
 package entities
 
 import (
-	"../rng"
+	"github.com/AlexSafatli/Saber/rng"
 )
 
 type World struct {

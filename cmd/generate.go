@@ -1,8 +1,8 @@
 package cmd
 
 import (
-	"../gen"
 	"fmt"
+	"github.com/AlexSafatli/Saber/gen"
 	"github.com/spf13/cobra"
 )
 
