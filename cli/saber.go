@@ -1,6 +1,7 @@
 package cli
 
 import (
+	"errors"
 	"fmt"
 	"github.com/spf13/cobra"
 	"os"
@@ -9,9 +10,17 @@ import (
 var rootCmd = &cobra.Command{
 	Use:   "saber",
 	Short: "Saber is a dungeon-mastering CLI for the technically competent",
-	Run: func(cmd *cobra.Command, args []string) {
-		// do stuff
+	Args: func(cmd *cobra.Command, args []string) error {
+		if len(args) == 0 {
+			return errors.New("need a command to run")
+		}
+		return nil
 	},
+	Run: noOpCmd,
+}
+
+func noOpCmd(_ *cobra.Command, _ []string) {
+
 }
 
 func Execute() {

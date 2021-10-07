@@ -8,15 +8,13 @@ import (
 
 var genRootCmd = &cobra.Command{
 	Use:   "generate",
-	Short: "Generates story elements",
-	Run: func(cmd *cobra.Command, args []string) {
-		// do stuff
-	},
+	Short: "Generate story elements",
+	Run:   noOpCmd,
 }
 
 var genWorldCmd = &cobra.Command{
 	Use:   "world",
-	Short: "Generates a new world",
+	Short: "Generate a new world",
 	Run: func(cmd *cobra.Command, args []string) {
 		l := gen.GenerateLanguage()
 		fmt.Println("Generated world: ", gen.GenerateWorld(l, 3))
@@ -25,7 +23,7 @@ var genWorldCmd = &cobra.Command{
 
 var genFamilyCmd = &cobra.Command{
 	Use:   "family",
-	Short: "Generates a family tree",
+	Short: "Generate a family tree",
 	Run: func(cmd *cobra.Command, args []string) {
 		l := gen.GenerateLanguage()
 		w := gen.GenerateWorld(l, 3)
