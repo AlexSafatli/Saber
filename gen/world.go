@@ -79,22 +79,16 @@ func PopulateRegion(r *rpg.Region, l *Language, complexity uint8, wg *sync.WaitG
 func GenerateRegionConnections(w *rpg.World) {
 	var wg sync.WaitGroup
 	wg.Add(len(w.Regions))
-	s := NewSeed()
+	s := NewPossibility()
 	for i := 0; i < len(w.Regions); i++ {
 		for j := i + 1; j < len(w.Regions); j++ {
 			var r uint
-			r = NewSeed()
-			if r < s {
-				s -= SeedReductionAmt
-				if s <= 0 {
-					s = 1
-				}
+			r = randPercentile()
+			if r < s.value {
+				s.Reduce()
 				makeRegionConnection(w, i, j)
 			} else {
-				s += SeedIncrementAmt
-				if s > 100 {
-					s = 100
-				}
+				s.Increase()
 			}
 		}
 		go GenerateSubregionConnections(&w.Regions[i], &wg)
@@ -104,22 +98,16 @@ func GenerateRegionConnections(w *rpg.World) {
 func GenerateSubregionConnections(re *rpg.Region, wg *sync.WaitGroup) {
 	defer wg.Done()
 	wg.Add(len(re.Subregions))
-	s := NewSeed()
+	s := NewPossibility()
 	for i := 0; i < len(re.Subregions); i++ {
 		for j := i + 1; j < len(re.Subregions); j++ {
 			var r uint
-			r = NewSeed()
-			if r < s {
-				s -= SeedReductionAmt
-				if s <= 0 {
-					s = 1
-				}
+			r = randPercentile()
+			if r < s.value {
+				s.Reduce()
 				makeSubregionConnection(re, i, j)
 			} else {
-				s += SeedIncrementAmt
-				if s > 100 {
-					s = 100
-				}
+				s.Increase()
 			}
 		}
 		go GenerateSubregionConnections(&re.Subregions[i], wg)
