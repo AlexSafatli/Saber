@@ -121,6 +121,8 @@ func makeRegionConnection(w *rpg.World, i, j int) {
 }
 
 func makeSubregionConnection(re *rpg.Region, i, j int) {
-	re.Subregions[i].Connections = append(re.Subregions[i].Connections, &re.Subregions[j])
-	re.Subregions[j].Connections = append(re.Subregions[j].Connections, &re.Subregions[i])
+	re.Subregions[i].Connections = append(re.Subregions[i].Connections,
+		&re.Subregions[j])
+	re.Subregions[j].Connections = append(re.Subregions[j].Connections,
+		&re.Subregions[i])
 }

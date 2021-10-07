@@ -26,8 +26,12 @@ func noOpCmd(_ *cobra.Command, _ []string) {
 }
 
 func Execute() {
+	// gen
 	genRootCmd.AddCommand(genWorldCmd)
 	genRootCmd.AddCommand(genFamilyCmd)
+	genRootCmd.Flags().Uint8VarP(&complexityFlag, "complexity", "c", 1, "a complexity for the story element being generated")
+
+	// root
 	rootCmd.AddCommand(genRootCmd)
 	if err := rootCmd.Execute(); err != nil {
 		fmt.Println(err)

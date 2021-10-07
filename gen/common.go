@@ -16,14 +16,14 @@ type Possibility struct {
 	value uint
 }
 
-func (p Possibility) Reduce() {
+func (p *Possibility) Reduce() {
 	p.value -= seedReductionAmt
 	if p.value <= 0 {
 		p.value = 1
 	}
 }
 
-func (p Possibility) Increase() {
+func (p *Possibility) Increase() {
 	p.value += seedIncrementAmt
 	if p.value > 100 {
 		p.value = 100
@@ -34,8 +34,8 @@ func Reseed() {
 	rand.Seed(int64(time.Now().Nanosecond()))
 }
 
-func NewPossibility() Possibility {
-	return Possibility{value: randPercentile()}
+func NewPossibility() *Possibility {
+	return &Possibility{value: randPercentile()}
 }
 
 func randPercentile() uint {

@@ -1,10 +1,15 @@
 package cli
 
 import (
+	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/AlexSafatli/Saber/gen"
 	"github.com/spf13/cobra"
+	"io/ioutil"
 )
+
+var complexityFlag uint8
 
 var genRootCmd = &cobra.Command{
 	Use:   "generate",
@@ -14,37 +19,44 @@ var genRootCmd = &cobra.Command{
 }
 
 var genWorldCmd = &cobra.Command{
-	Use:   "world",
+	Use:   "world <output_json>",
 	Short: "Generate a new world",
+	Args: func(cmd *cobra.Command, args []string) error {
+		if len(args) != 1 {
+			return errors.New("need only a path for the output JSON")
+		}
+		return nil
+	},
 	Run: func(cmd *cobra.Command, args []string) {
 		l := gen.GenerateLanguage()
-		fmt.Println("Generated world: ", gen.GenerateWorld(l, 3))
+		w := gen.GenerateWorld(l, complexityFlag)
+		file, _ := json.MarshalIndent(w, "", " ")
+		if err := ioutil.WriteFile(args[0], file, 0644); err != nil {
+			panic(err)
+		}
+		fmt.Printf("Generated world (complexity %d) and saved to %s.\n",
+			complexityFlag, args[0])
 	},
 }
 
 var genFamilyCmd = &cobra.Command{
-	Use:   "family",
+	Use:   "family <output_json>",
 	Short: "Generate a family tree",
+	Args: func(cmd *cobra.Command, args []string) error {
+		if len(args) != 1 {
+			return errors.New("need only a path for the output JSON")
+		}
+		return nil
+	},
 	Run: func(cmd *cobra.Command, args []string) {
 		l := gen.GenerateLanguage()
-		w := gen.GenerateWorld(l, 3)
+		w := gen.GenerateWorld(l, complexityFlag)
 		f := gen.GenerateFamily(l, &w.Regions[0])
-		tree := gen.GenerateFamilyTree(f, w, 2)
-		fmt.Print("Generated family:\n\n")
-		printTreeNode(&tree.Root, 0)
+		tree := gen.GenerateFamilyTree(f, w, 3)
+		file, _ := json.MarshalIndent(tree, "", " ")
+		if err := ioutil.WriteFile(args[0], file, 0644); err != nil {
+			panic(err)
+		}
+		fmt.Printf("Generated family and saved to %s.\n", args[0])
 	},
-}
-
-func printTreeNode(node *gen.FamilyTreeNode, level uint) {
-	var tabs = ""
-	var i uint = 0
-	for i < level {
-		tabs += "\t" // TODO string builder
-		i++
-	}
-	fmt.Printf("%s%s (%s) with %d children\n", tabs, node.Character.Name,
-		node.Character.Profession, len(node.Children))
-	for _, child := range node.Children {
-		printTreeNode(child, level+1)
-	}
 }

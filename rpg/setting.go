@@ -11,8 +11,8 @@ type World struct {
 
 type Region struct {
 	Location
-	Connections []*Region
-	Subregions  []Region
+	Connections []*Region `json:"-"`
+	Subregions  []Region  `json:",omitempty"`
 }
 
 type Settlement struct {
@@ -23,7 +23,7 @@ type Settlement struct {
 
 type Location struct {
 	Name string
-	Tags []EntityTag
+	Tags []EntityTag `json:",omitempty"`
 	Type uint8
 }
 

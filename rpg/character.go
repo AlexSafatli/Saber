@@ -1,19 +1,19 @@
 package rpg
 
 type Character struct {
-	ID              uint
+	ID              uint `json:",omitempty"`
 	Name            string
 	Race            string
 	Profession      string
 	Gender          string
 	Characteristics map[string]EntityTag `json:"-"`
 	Level           uint64
-	GenerationDelta int  `json:"Generation Delta"`
-	YOBDelta        int  `json:"Year of Birth Delta"`
-	YODDelta        int  `json:"Year of Death Delta"`
-	MotherID        uint `json:"Mother ID"`
-	FatherID        uint `json:"Father ID"`
-	LocationID      uint `json:"Location ID"`
+	GenerationDelta int  `json:"Generation Delta,omitempty"`
+	YOBDelta        int  `json:"Year of Birth Delta,omitempty"`
+	YODDelta        int  `json:"Year of Death Delta,omitempty"`
+	MotherID        uint `json:"Mother ID,omitempty"`
+	FatherID        uint `json:"Father ID,omitempty"`
+	LocationID      uint `json:"Location ID,omitempty"`
 	PC              bool `json:"-"`
 }
 

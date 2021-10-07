@@ -33,11 +33,11 @@ type FamilyTree struct {
 
 type FamilyTreeNode struct {
 	Character   *rpg.Character
-	BirthFamily *Family
-	Mother      *FamilyTreeNode
-	Father      *FamilyTreeNode
-	Spouse      *FamilyTreeNode
-	Children    []*FamilyTreeNode
+	BirthFamily *Family           `json:"-"`
+	Mother      *FamilyTreeNode   `json:"-"`
+	Father      *FamilyTreeNode   `json:"-"`
+	Spouse      *FamilyTreeNode   `json:"-"`
+	Children    []*FamilyTreeNode `json:",omitempty"`
 }
 
 func (n *FamilyTreeNode) Siblings() []*FamilyTreeNode {
@@ -76,11 +76,13 @@ func (n *FamilyTreeNode) GenerateSpouse(w *rpg.World) {
 }
 
 func (n *FamilyTreeNode) CanHaveChildren() bool {
-	return n.Married() && (n.Character.Gender == GenderFemale || n.Spouse.Character.Gender == GenderFemale)
+	return n.Married() && (n.Character.Gender == GenderFemale ||
+		n.Spouse.Character.Gender == GenderFemale)
 }
 
 func generateFamilyTreeNode(f *Family, gender string) *FamilyTreeNode {
-	node := &FamilyTreeNode{BirthFamily: f, Character: GenerateCharacter(f.Language, gender)}
+	node := &FamilyTreeNode{BirthFamily: f,
+		Character: GenerateCharacter(f.Language, gender)}
 	return node
 }
 
@@ -88,7 +90,8 @@ func RandomGender() string {
 	return rng.Choose(Genders)
 }
 
-func GenerateFamilyTree(f *Family, w *rpg.World, numStartingChildren int) *FamilyTree {
+func GenerateFamilyTree(f *Family, w *rpg.World,
+	numStartingChildren int) *FamilyTree {
 	tree := FamilyTree{
 		Root: *generateFamilyTreeNode(f, GenderMale),
 	}
@@ -105,7 +108,8 @@ func GenerateFamilyTree(f *Family, w *rpg.World, numStartingChildren int) *Famil
 	return &tree
 }
 
-func PopulateFamilyTree(node *FamilyTreeNode, w *rpg.World, wg *sync.WaitGroup) {
+func PopulateFamilyTree(node *FamilyTreeNode, w *rpg.World,
+	wg *sync.WaitGroup) {
 	defer wg.Done()
 	if !node.CanHaveChildren() {
 		return // only populate children if they can have children
@@ -114,7 +118,8 @@ func PopulateFamilyTree(node *FamilyTreeNode, w *rpg.World, wg *sync.WaitGroup) 
 	wg.Add(numChildren)
 	node.Children = make([]*FamilyTreeNode, numChildren)
 	for i := 0; i < numChildren; i++ {
-		node.Children[i] = generateFamilyTreeNode(node.BirthFamily, RandomGender())
+		node.Children[i] = generateFamilyTreeNode(node.BirthFamily,
+			RandomGender())
 		if node.Character.Gender == GenderMale {
 			node.Children[i].Father = node
 			node.Children[i].Mother = node.Spouse
