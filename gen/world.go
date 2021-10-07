@@ -19,8 +19,9 @@ func GenerateWorld(l *Language, complexity uint8) *rpg.World {
 	return w
 }
 
-// TODO refactor this to use different languages for different regions OR genetically change
 func PopulateWorld(w *rpg.World, l *Language, complexity uint8) {
+	// TODO refactor this to use different languages for different regions OR
+	// genetically change
 	var numRegions = 0
 
 	switch complexity {
