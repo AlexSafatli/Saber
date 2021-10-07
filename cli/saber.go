@@ -10,13 +10,15 @@ import (
 var rootCmd = &cobra.Command{
 	Use:   "saber",
 	Short: "Saber is a dungeon-mastering CLI for the technically competent",
-	Args: func(cmd *cobra.Command, args []string) error {
-		if len(args) == 0 {
-			return errors.New("need a command to run")
-		}
-		return nil
-	},
-	Run: noOpCmd,
+	Args:  needCommandArg,
+	Run:   noOpCmd,
+}
+
+func needCommandArg(_ *cobra.Command, args []string) error {
+	if len(args) == 0 {
+		return errors.New("need a command to run")
+	}
+	return nil
 }
 
 func noOpCmd(_ *cobra.Command, _ []string) {

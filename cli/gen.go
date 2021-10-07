@@ -9,6 +9,7 @@ import (
 var genRootCmd = &cobra.Command{
 	Use:   "generate",
 	Short: "Generate story elements",
+	Args:  needCommandArg,
 	Run:   noOpCmd,
 }
 
