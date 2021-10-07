@@ -1,6 +1,9 @@
 # Saber
 
-An efficient Go library for dungeon mastering (DMing) tabletop games designed to be system-agnostic. Has an accompanying optional CLI. Can be extended to other use-cases such as for interfacing with [AirTable](https://airtable.com) (see an example [with D&D 5E](https://github.com/AlexSafatli/airtable-dnd)).
+A Go library intended for dungeon mastering (DMing) tabletop games and designed 
+to be system-agnostic. Has an accompanying optional CLI. Can be extended to 
+other use-cases such as for interfacing with [AirTable](https://airtable.com) 
+(see an example [with D&D 5E](https://github.com/AlexSafatli/airtable-dnd)).
 
 ## Current Features
 
@@ -11,8 +14,6 @@ An efficient Go library for dungeon mastering (DMing) tabletop games designed to
 
 ## Planned Features
 
-- Manage campaigns and store history of commands as a set of atomic 
-  **transactions** (actions will be *journaled*, locally or remotely).
 - Create random PCs/NPCs with skeleton backgrounds, personality, and 
   strengths/weaknesses (**character generation** with *tagging*).
   - Complex characteristic and tag generation using editable tables found in files (see `tables`).
@@ -31,6 +32,8 @@ An efficient Go library for dungeon mastering (DMing) tabletop games designed to
 - Create adventure/episode/arc/story skeletons [3].
   - Randomly generate elements of these [4].
   - Output to PDF (LaTeX? Homebrewery-esque?).
+- Manage campaigns and store history of commands as a set of atomic 
+  **transactions** (actions will be *journaled*, locally or remotely).
 
 ## Package Structure
 
@@ -48,14 +51,11 @@ An efficient Go library for dungeon mastering (DMing) tabletop games designed to
 
 ### Related Articles
 
-- https://www.reddit.com/r/Pathfinder_RPG/comments/2t8xwu/compilation_of_random_character_creation_tables/
+  - https://www.reddit.com/r/Pathfinder_RPG/comments/2t8xwu/compilation_of_random_character_creation_tables/
 
 ### References
 
-[1] https://www.reddit.com/r/DnD/comments/452r6r/a_massive_and_growing_resource_of_random_tables/
-
-[2] http://redbeardsravings.blogspot.ca/2011/08/faction-connections-in-megadungeon.html
-
-[3] https://fate-srd.com/fate-core/defining-scenarios
-
-[4] http://geekandsundry.com/how-to-write-the-best-dd-adventures-ever/
+  - [1] https://www.reddit.com/r/DnD/comments/452r6r/a_massive_and_growing_resource_of_random_tables/
+  - [2] http://redbeardsravings.blogspot.ca/2011/08/faction-connections-in-megadungeon.html
+  - [3] https://fate-srd.com/fate-core/defining-scenarios
+  - [4] http://geekandsundry.com/how-to-write-the-best-dd-adventures-ever/
