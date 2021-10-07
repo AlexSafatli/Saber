@@ -1,8 +1,8 @@
 package gen
 
 import (
-	"github.com/AlexSafatli/Saber/entities"
 	"github.com/AlexSafatli/Saber/rng"
+	"github.com/AlexSafatli/Saber/rpg"
 	"sync"
 )
 
@@ -15,11 +15,11 @@ var Genders = []string{GenderMale, GenderFemale}
 
 type Family struct {
 	Surname  string
-	Origin   *entities.Region
+	Origin   *rpg.Region
 	Language *Language
 }
 
-func GenerateFamily(l *Language, r *entities.Region) *Family {
+func GenerateFamily(l *Language, r *rpg.Region) *Family {
 	return &Family{
 		Surname:  l.Name(),
 		Origin:   r,
@@ -32,7 +32,7 @@ type FamilyTree struct {
 }
 
 type FamilyTreeNode struct {
-	Character   *entities.Character
+	Character   *rpg.Character
 	BirthFamily *Family
 	Mother      *FamilyTreeNode
 	Father      *FamilyTreeNode
@@ -63,7 +63,7 @@ func (n *FamilyTreeNode) Married() bool {
 	return n.Spouse != nil
 }
 
-func (n *FamilyTreeNode) GenerateSpouse(w *entities.World) {
+func (n *FamilyTreeNode) GenerateSpouse(w *rpg.World) {
 	var spouseGender string
 	if n.Character.Gender == GenderMale {
 		spouseGender = GenderFemale
@@ -88,7 +88,7 @@ func RandomGender() string {
 	return rng.Choose(Genders)
 }
 
-func GenerateFamilyTree(f *Family, w *entities.World, numStartingChildren int) *FamilyTree {
+func GenerateFamilyTree(f *Family, w *rpg.World, numStartingChildren int) *FamilyTree {
 	tree := FamilyTree{
 		Root: *generateFamilyTreeNode(f, GenderMale),
 	}
@@ -105,7 +105,7 @@ func GenerateFamilyTree(f *Family, w *entities.World, numStartingChildren int) *
 	return &tree
 }
 
-func PopulateFamilyTree(node *FamilyTreeNode, w *entities.World, wg *sync.WaitGroup) {
+func PopulateFamilyTree(node *FamilyTreeNode, w *rpg.World, wg *sync.WaitGroup) {
 	defer wg.Done()
 	if !node.CanHaveChildren() {
 		return // only populate children if they can have children

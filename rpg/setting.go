@@ -1,4 +1,4 @@
-package entities
+package rpg
 
 import (
 	"github.com/AlexSafatli/Saber/rng"

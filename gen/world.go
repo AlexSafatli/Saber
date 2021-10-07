@@ -1,7 +1,7 @@
 package gen
 
 import (
-	"github.com/AlexSafatli/Saber/entities"
+	"github.com/AlexSafatli/Saber/rpg"
 	"sync"
 )
 
@@ -12,15 +12,15 @@ const (
 	WorldComplexityExtraLarge = 4
 )
 
-func GenerateWorld(l *Language, complexity uint8) *entities.World {
-	w := entities.NewWorld(l.Name())
+func GenerateWorld(l *Language, complexity uint8) *rpg.World {
+	w := rpg.NewWorld(l.Name())
 	PopulateWorld(w, l, complexity)
 	GenerateRegionConnections(w)
 	return w
 }
 
 // TODO refactor this to use different languages for different regions OR genetically change
-func PopulateWorld(w *entities.World, l *Language, complexity uint8) {
+func PopulateWorld(w *rpg.World, l *Language, complexity uint8) {
 	var numRegions = 0
 
 	switch complexity {
@@ -36,15 +36,15 @@ func PopulateWorld(w *entities.World, l *Language, complexity uint8) {
 
 	var wg sync.WaitGroup
 	wg.Add(numRegions)
-	w.Regions = make([]entities.Region, numRegions)
+	w.Regions = make([]rpg.Region, numRegions)
 	for i := 0; i < numRegions; i++ {
-		w.Regions[i] = entities.MakeRegion(l.Name(), entities.GenerateLargeLocationType())
+		w.Regions[i] = rpg.MakeRegion(l.Name(), rpg.GenerateLargeLocationType())
 		go PopulateRegion(&w.Regions[i], l, complexity, &wg)
 	}
 	wg.Wait()
 }
 
-func PopulateRegion(r *entities.Region, l *Language, complexity uint8, wg *sync.WaitGroup) {
+func PopulateRegion(r *rpg.Region, l *Language, complexity uint8, wg *sync.WaitGroup) {
 	defer wg.Done()
 	if complexity == 0 {
 		return
@@ -63,20 +63,20 @@ func PopulateRegion(r *entities.Region, l *Language, complexity uint8, wg *sync.
 	}
 
 	wg.Add(numRegions)
-	r.Subregions = make([]entities.Region, numRegions)
+	r.Subregions = make([]rpg.Region, numRegions)
 	for i := 0; i < numRegions; i++ {
 		var locationType uint8
 		if r.IsLargeLocation() {
-			locationType = entities.GenerateCityLocationType()
+			locationType = rpg.GenerateCityLocationType()
 		} else {
-			locationType = entities.NextSmallestLocationType(r.Type)
+			locationType = rpg.NextSmallestLocationType(r.Type)
 		}
-		r.Subregions[i] = entities.MakeRegion(l.Name(), locationType)
+		r.Subregions[i] = rpg.MakeRegion(l.Name(), locationType)
 		go PopulateRegion(&r.Subregions[i], l, complexity-1, wg)
 	}
 }
 
-func GenerateRegionConnections(w *entities.World) {
+func GenerateRegionConnections(w *rpg.World) {
 	var wg sync.WaitGroup
 	wg.Add(len(w.Regions))
 	s := NewSeed()
@@ -101,7 +101,7 @@ func GenerateRegionConnections(w *entities.World) {
 	}
 }
 
-func GenerateSubregionConnections(re *entities.Region, wg *sync.WaitGroup) {
+func GenerateSubregionConnections(re *rpg.Region, wg *sync.WaitGroup) {
 	defer wg.Done()
 	wg.Add(len(re.Subregions))
 	s := NewSeed()
@@ -126,12 +126,12 @@ func GenerateSubregionConnections(re *entities.Region, wg *sync.WaitGroup) {
 	}
 }
 
-func makeRegionConnection(w *entities.World, i, j int) {
+func makeRegionConnection(w *rpg.World, i, j int) {
 	w.Regions[i].Connections = append(w.Regions[i].Connections, &w.Regions[j])
 	w.Regions[j].Connections = append(w.Regions[j].Connections, &w.Regions[i])
 }
 
-func makeSubregionConnection(re *entities.Region, i, j int) {
+func makeSubregionConnection(re *rpg.Region, i, j int) {
 	re.Subregions[i].Connections = append(re.Subregions[i].Connections, &re.Subregions[j])
 	re.Subregions[j].Connections = append(re.Subregions[j].Connections, &re.Subregions[i])
 }

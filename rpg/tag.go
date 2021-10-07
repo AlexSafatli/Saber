@@ -1,4 +1,4 @@
-package entities
+package rpg
 
 type EntityTag struct {
 	Name  string
