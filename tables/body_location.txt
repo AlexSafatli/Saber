@@ -1,0 +1,15 @@
+0 1 Head
+1 2 Face
+2 3 Right Arm
+3 4 Left Arm
+4 5 Right Leg
+5 6 Left Leg
+6 7 Torso
+7 8 Groin
+8 9 Left Foot
+9 10 Right Foot
+10 11 Left Hand
+11 12 Right Hand
+12 13 Left Wrist
+13 14 Right Wrist
+15 16 Neck

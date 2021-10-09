@@ -1,7 +1,7 @@
-0 1 Birthmark ({location})
-1 2 Body piercing ({location})
-2 3 Scarred ({location})
-3 4 Tattooed ({location})
+0 1 Birthmark ({.body_location})
+1 2 Body piercing ({.body_location})
+2 3 Scarred ({.body_location})
+3 4 Tattooed ({.body_location})
 4 5 Punctual
 5 6 Tends to arrive late
 6 7 Tends to give vague answers
@@ -15,7 +15,7 @@
 14 15 Black eye
 15 16 Bleeding nose
 16 17 Blinks constantly
-17 18 Burn scar ({location})
+17 18 Burn scar ({.body_location})
 18 19 Clicks tongue
 19 20 Cracks knuckles
 20 21 Dandruff
@@ -59,6 +59,6 @@
 58 59 Hydrophobic
 59 60 Insomniac
 60 61 Habitual liar
-61 62 Addict ({substance})
+61 62 Addict ({.substance})
 62 63 Obsessive gambler
 63 64 Short attention span

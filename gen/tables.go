@@ -12,15 +12,21 @@ import (
 )
 
 const (
-	TablesPath               = "tables"
-	TableProfessionsFileName = "professions.txt"
-	TableBuildingsFileName   = "buildings.txt"
+	TablesPath                   = "tables"
+	TableBuildingsFileName       = "building.txt"
+	TableCharacteristicsFileName = "characteristic.txt"
+	TableProfessionsFileName     = "profession.txt"
 )
 
 var (
-	Tables           = []*RandomTable{&TableProfessions, &TableBuildings}
-	TableProfessions RandomTable
-	TableBuildings   RandomTable
+	Tables = []*RandomTable{
+		&TableBuildings,
+		&TableCharacteristics,
+		&TableProfessions,
+	}
+	TableBuildings       RandomTable
+	TableCharacteristics RandomTable
+	TableProfessions     RandomTable
 )
 
 type RandomTable struct {
@@ -120,12 +126,15 @@ func randomTablePath(fileName string) string {
 	return filepath.Join(TablesPath, fileName)
 }
 
+func initRandomTable(fileName string) RandomTable {
+	table, err := NewRandomTable(randomTablePath(fileName))
+	if err != nil {
+		panic(err)
+	}
+	return table
+}
+
 func InitRandomTables() {
-	var err error
-	if TableProfessions, err = NewRandomTable(randomTablePath(TableProfessionsFileName)); err != nil {
-		panic(err)
-	}
-	if TableBuildings, err = NewRandomTable(randomTablePath(TableBuildingsFileName)); err != nil {
-		panic(err)
-	}
+	TableBuildings = initRandomTable(TableBuildingsFileName)
+	TableProfessions = initRandomTable(TableProfessionsFileName)
 }
