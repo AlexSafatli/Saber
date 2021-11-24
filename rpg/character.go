@@ -1,7 +1,9 @@
 package rpg
 
+import "go.mongodb.org/mongo-driver/bson/primitive"
+
 type Character struct {
-	ID              uint `json:",omitempty"`
+	ID              primitive.ObjectID `bson:"_id,omitempty"`
 	Name            string
 	Race            string
 	Culture         string

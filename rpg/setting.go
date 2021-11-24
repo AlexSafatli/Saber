@@ -2,6 +2,7 @@ package rpg
 
 import (
 	"github.com/AlexSafatli/Saber/rng"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 type World struct {
@@ -23,7 +24,8 @@ type Settlement struct {
 
 type Location struct {
 	Name string
-	Tags []EntityTag `json:",omitempty"`
+	ID   primitive.ObjectID `bson:"_id,omitempty"`
+	Tags []EntityTag        `json:",omitempty"`
 	Type uint8
 }
 

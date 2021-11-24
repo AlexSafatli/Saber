@@ -1,9 +1,13 @@
 package cli
 
 import (
+	"context"
 	"errors"
 	"fmt"
+	"github.com/AlexSafatli/Saber/db"
+	"github.com/AlexSafatli/Saber/rpg"
 	"github.com/spf13/cobra"
+	"go.mongodb.org/mongo-driver/mongo"
 	"os"
 )
 
@@ -23,6 +27,20 @@ func needCommandArg(_ *cobra.Command, args []string) error {
 
 func noOpCmd(_ *cobra.Command, _ []string) {
 
+}
+
+func getCampaign(query string) (client *mongo.Client, ctx context.Context, c *rpg.Campaign) {
+	var err error
+	client, ctx, err = db.Connect()
+	if err != nil {
+		panic(err)
+	}
+	campaigns := db.Campaigns(client)
+	err = campaigns.FindOne(ctx, rpg.Campaign{Name: query}).Decode(c)
+	if err != nil {
+		panic(err)
+	}
+	return
 }
 
 func Execute() {

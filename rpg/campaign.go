@@ -1,9 +1,14 @@
 package rpg
 
+import "go.mongodb.org/mongo-driver/bson/primitive"
+
 type Campaign struct {
 	Name             string
-	DM               string
+	ID               primitive.ObjectID
 	StartDate        uint
 	PlayerCharacters []*Character
-	World            *World
+}
+
+func NewCampaign(name string) *Campaign {
+	return &Campaign{Name: name}
 }
