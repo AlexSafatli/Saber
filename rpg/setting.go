@@ -12,8 +12,8 @@ type World struct {
 
 type Region struct {
 	Location
-	Connections []*Region `json:"-"`
-	Subregions  []Region  `json:",omitempty"`
+	Connections []*Region `json:"-" bson:"-"`
+	Subregions  []Region  `json:",omitempty" bson:",omitempty"`
 }
 
 type Settlement struct {
@@ -25,17 +25,17 @@ type Settlement struct {
 type Location struct {
 	Name string
 	ID   primitive.ObjectID `bson:"_id,omitempty"`
-	Tags []EntityTag        `json:",omitempty"`
+	Tags []EntityTag        `json:",omitempty" bson:",omitempty"`
 	Type uint8
 }
 
 type Date struct {
 	Delta                uint
-	AddSpouseID          uint `json:",omitempty"`
-	RemoveSpouseID       uint `json:",omitempty"`
-	EmployerID           uint `json:",omitempty"`
-	AddCharacteristic    uint `json:",omitempty"`
-	RemoveCharacteristic uint `json:",omitempty"`
+	AddSpouseID          uint `json:",omitempty" bson:",omitempty"`
+	RemoveSpouseID       uint `json:",omitempty" bson:",omitempty"`
+	EmployerID           uint `json:",omitempty" bson:",omitempty"`
+	AddCharacteristic    uint `json:",omitempty" bson:",omitempty"`
+	RemoveCharacteristic uint `json:",omitempty" bson:",omitempty"`
 }
 
 const (

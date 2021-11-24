@@ -3,6 +3,7 @@ package gen
 import (
 	"bytes"
 	"github.com/AlexSafatli/Saber/rng"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"math/rand"
 	"strings"
 )
@@ -16,6 +17,7 @@ type Phonemes struct {
 
 type Language struct {
 	*Phonemes
+	ID           primitive.ObjectID `bson:"_id,omitempty"`
 	Structure    string
 	MinSyllables int8
 	MaxSyllables int8

@@ -30,7 +30,7 @@ var genWorldCmd = &cobra.Command{
 	},
 	Run: func(cmd *cobra.Command, args []string) {
 		client, ctx, c := getCampaign(args[0])
-		cmpn := db.Campaign(client, c.ID.String())
+		cmpn := db.Campaign(client, c.ID.Hex())
 		l := gen.GenerateLanguage()
 		w := gen.GenerateWorld(l, complexityFlag)
 		_, err := cmpn.Collection("languages").InsertOne(ctx, l)
@@ -50,14 +50,14 @@ var genFamilyCmd = &cobra.Command{
 	Use:   "family <campaign>",
 	Short: "Generate a family tree",
 	Args: func(cmd *cobra.Command, args []string) error {
-		if len(args) != 2 {
+		if len(args) != 1 {
 			return errors.New("need a name or ID for the campaign")
 		}
 		return nil
 	},
 	Run: func(cmd *cobra.Command, args []string) {
 		client, ctx, c := getCampaign(args[0])
-		cmpn := db.Campaign(client, c.ID.String())
+		cmpn := db.Campaign(client, c.ID.Hex())
 		l := gen.GenerateLanguage()
 		w := gen.GenerateWorld(l, complexityFlag)
 		f := gen.GenerateFamily(l, &w.Regions[0])

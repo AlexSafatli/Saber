@@ -36,7 +36,7 @@ func getCampaign(query string) (client *mongo.Client, ctx context.Context, c *rp
 		panic(err)
 	}
 	campaigns := db.Campaigns(client)
-	err = campaigns.FindOne(ctx, rpg.Campaign{Name: query}).Decode(c)
+	err = campaigns.FindOne(ctx, rpg.Campaign{Name: query}).Decode(&c)
 	if err != nil {
 		panic(err)
 	}
@@ -44,12 +44,16 @@ func getCampaign(query string) (client *mongo.Client, ctx context.Context, c *rp
 }
 
 func Execute() {
+	// create
+	createRootCmd.AddCommand(createCampaignCmd)
+
 	// gen
 	genRootCmd.AddCommand(genWorldCmd)
 	genRootCmd.AddCommand(genFamilyCmd)
 	genRootCmd.Flags().Uint8VarP(&complexityFlag, "complexity", "c", 1, "a complexity for the story element being generated")
 
 	// root
+	rootCmd.AddCommand(createRootCmd)
 	rootCmd.AddCommand(genRootCmd)
 	if err := rootCmd.Execute(); err != nil {
 		fmt.Println(err)
