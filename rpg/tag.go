@@ -1,7 +1,7 @@
 package rpg
 
 type EntityTag struct {
+	ID    uint
 	Name  string
-	Type  uint8
 	Value string
 }

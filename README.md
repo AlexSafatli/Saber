@@ -35,18 +35,6 @@ other use-cases such as for interfacing with [AirTable](https://airtable.com)
 - Manage campaigns and store history of commands as a set of atomic 
   **transactions** (actions will be *journaled*, locally or remotely).
 
-## Package Structure
-
-- `cmd` contains CLI structure and handlers
-- `entities` stores all constructs and logic associated with entities (incl. NPCs, PCs) excl. 
-  generation
-- `encounters` stores all logic associated with encounters (between 
-  `characters`)
-- `rng` stores all logic associated with randomly choosing items
-- `gen` stores all high-level random generation logic
-- `stats` stores all system-specific logic
-- `tables` contains random tables as text files
-
 ## Further Reading
 
 ### Related Articles

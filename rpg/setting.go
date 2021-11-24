@@ -27,6 +27,15 @@ type Location struct {
 	Type uint8
 }
 
+type Date struct {
+	Delta                uint
+	AddSpouseID          uint `json:",omitempty"`
+	RemoveSpouseID       uint `json:",omitempty"`
+	EmployerID           uint `json:",omitempty"`
+	AddCharacteristic    uint `json:",omitempty"`
+	RemoveCharacteristic uint `json:",omitempty"`
+}
+
 const (
 	LocationTypeWorld     = 0
 	LocationTypeContinent = 1

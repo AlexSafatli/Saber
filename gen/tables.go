@@ -65,11 +65,7 @@ func (r *RandomTable) Parse(path string) error {
 	if err != nil {
 		return err
 	}
-	defer func() {
-		if err = f.Close(); err != nil {
-			panic(err)
-		}
-	}()
+	defer closeTableFile(f)
 	base := filepath.Base(path)
 	r.Name = base[0 : len(base)-len(filepath.Ext(path))]
 	r.Values = make(map[int]string)
@@ -124,6 +120,12 @@ func formatRandomTableString(s string) string {
 
 func randomTablePath(fileName string) string {
 	return filepath.Join(TablesPath, fileName)
+}
+
+func closeTableFile(f *os.File) {
+	if err := f.Close(); err != nil {
+		panic(err)
+	}
 }
 
 func initRandomTable(fileName string) RandomTable {
