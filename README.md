@@ -1,21 +1,22 @@
 # Saber
 
-A Go library intended for dungeon mastering (DMing) tabletop games and designed 
-to be system-agnostic. Has an accompanying optional CLI. Can be extended to 
-other use-cases such as for interfacing with [AirTable](https://airtable.com) 
-(see an example [with D&D 5E](https://github.com/AlexSafatli/airtable-dnd)).
+A software engine solution with an underlying CLI/API intended for dungeon 
+mastering (DMing) tabletop games and designed  to be system-agnostic. Has an 
+accompanying optional CLI. Can be extended to other use-cases such as for 
+interfacing with [AirTable](https://airtable.com) (see an example 
+[with D&D 5E](https://github.com/AlexSafatli/airtable-dnd)).
 
 ## Current Features
 
- - Character generation
- - World/region generation
- - Language generation
- - Family tree generation
+- MongoDB object non-relational database to store RPG elements
+- Character generation
+- World/region generation
+- Language generation
+- Family tree generation
 
 ## Planned Features
 
-- Create random PCs/NPCs with skeleton backgrounds, personality, and 
-  strengths/weaknesses (**character generation** with *tagging*).
+- Create random PCs/NPCs with skeleton backgrounds, personality, and strengths/weaknesses (**character generation** with *tagging*).
   - Complex characteristic and tag generation using editable tables found in files (see `tables`).
   - Will list relative attributes in a system-agnostic fashion (but use typical archetypical features such as Strength and Charisma).
 - Create random locations and populations (e.g., cities, countries, regions) with placed 
