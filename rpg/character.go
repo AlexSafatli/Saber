@@ -13,14 +13,14 @@ type Character struct {
 	Religion        string
 	Characteristics map[string]EntityTag `json:"-"`
 	Level           uint64
-	GenerationDelta int    `json:"Generation Delta,omitempty"`
-	YOBDelta        int    `json:"Year of Birth Delta,omitempty"`
-	YODDelta        int    `json:"Year of Death Delta,omitempty"`
-	DateDeltas      []Date `json:"Date Deltas,omitempty"`
-	MotherID        uint   `json:"Mother ID,omitempty"`
-	FatherID        uint   `json:"Father ID,omitempty"`
-	LocationID      uint   `json:"Location ID,omitempty"`
-	PC              bool   `json:"-"`
+	GenerationDelta int                `json:"Generation Delta,omitempty"`
+	YOBDelta        int                `json:"Year of Birth Delta,omitempty"`
+	YODDelta        int                `json:"Year of Death Delta,omitempty"`
+	DateDeltas      []Date             `json:"Date Deltas,omitempty"`
+	MotherID        primitive.ObjectID `json:"Mother ID,omitempty"`
+	FatherID        primitive.ObjectID `json:"Father ID,omitempty"`
+	LocationID      primitive.ObjectID `json:"Location ID,omitempty"`
+	PC              bool               `json:"-"`
 }
 
 const (

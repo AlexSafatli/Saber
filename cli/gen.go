@@ -7,6 +7,7 @@ import (
 	"github.com/AlexSafatli/Saber/db"
 	"github.com/AlexSafatli/Saber/gen"
 	"github.com/spf13/cobra"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -70,20 +71,23 @@ var genFamilyCmd = &cobra.Command{
 		if err != nil {
 			panic(err)
 		}
-		_, err = cmpn.Collection("families").InsertOne(ctx, f)
-		if err != nil {
-			panic(err)
-		}
 		insertFamilyTreeNode(cmpn, ctx, &tree.Root)
 		fmt.Printf("Generated family '%s' and world '%s' for %s.\n", f.Surname, w.Name, args[0])
 	},
 }
 
 func insertFamilyTreeNode(cmpn *mongo.Database, ctx context.Context, node *gen.FamilyTreeNode) {
-	_, err := cmpn.Collection("characters").InsertOne(ctx, node.Character)
+	if node.Character.ID != primitive.NilObjectID {
+		return
+	}
+	node.Character.MotherID = node.Mother.Character.ID
+	node.Character.FatherID = node.Father.Character.ID
+	res, err := cmpn.Collection("characters").InsertOne(ctx, node.Character)
 	if err != nil {
 		panic(err)
 	}
+	node.Character.ID = res.InsertedID.(primitive.ObjectID)
+	insertFamilyTreeNode(cmpn, ctx, node.Spouse)
 	for i := range node.Children {
 		insertFamilyTreeNode(cmpn, ctx, node.Children[i])
 	}
