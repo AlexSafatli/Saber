@@ -10,6 +10,7 @@ Can be extended to other use-cases such as for interfacing with
 ## Current Features
 
 - MongoDB object non-relational database to store RPG elements
+- Campaign management
 - Character generation
 - World/region generation
 - Language generation
@@ -43,8 +44,6 @@ Can be extended to other use-cases such as for interfacing with
 - Create adventure/episode/arc/story skeletons [3].
   - Randomly generate elements of these [4].
   - Output to PDF (LaTeX? Homebrewery-esque?).
-- Manage campaigns and store history of commands as a set of atomic 
-  **transactions** (actions will be *journaled*, locally or remotely).
 
 ## Further Reading
 
