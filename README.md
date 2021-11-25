@@ -15,6 +15,12 @@ Can be extended to other use-cases such as for interfacing with
 - Language generation
 - Family tree generation
 
+## Planned Architecture
+
+- API/Daemon microservice
+- CLI
+- Plugin support for Lua
+
 ## Planned Features
 
 - Create random PCs/NPCs with skeleton backgrounds, personality, and 
