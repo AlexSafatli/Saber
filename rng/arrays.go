@@ -1,6 +1,7 @@
 package rng
 
 import "math/rand"
+import "golang.org/x/exp/constraints"
 
 func ShuffleSlice(a *[]interface{}) {
 	for i := range *a {
@@ -18,12 +19,7 @@ func ShuffledSlice(a []interface{}) []interface{} {
 	return b
 }
 
-func Choose(a []string) string {
-	i := rand.Intn(len(a))
-	return a[i]
-}
-
-func ChooseUint8(a []uint8) uint8 {
-	i := rand.Intn(len(a))
-	return a[i]
+func Choose[S ~[]E, E constraints.Ordered](s S) E {
+	i := rand.Intn(len(s))
+	return s[i]
 }

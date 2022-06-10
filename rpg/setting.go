@@ -78,15 +78,15 @@ func MakeRegion(name string, locType uint8) Region {
 }
 
 func GenerateLargeLocationType() uint8 {
-	return rng.ChooseUint8(LargeLocationTypes)
+	return rng.Choose(LargeLocationTypes)
 }
 
 func GenerateCityLocationType() uint8 {
-	return rng.ChooseUint8(CityLocationTypes)
+	return rng.Choose(CityLocationTypes)
 }
 
 func GenerateLocalLocationType() uint8 {
-	return rng.ChooseUint8(LocalLocationTypes)
+	return rng.Choose(LocalLocationTypes)
 }
 
 func NextSmallestLocationType(locType uint8) uint8 {
