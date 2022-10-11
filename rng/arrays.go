@@ -1,6 +1,9 @@
 package rng
 
-import "math/rand"
+import (
+	wr "github.com/mroth/weightedrand"
+	"math/rand"
+)
 import "golang.org/x/exp/constraints"
 
 func ShuffleSlice(a *[]interface{}) {
@@ -22,4 +25,13 @@ func ShuffledSlice(a []interface{}) []interface{} {
 func Choose[S ~[]E, E constraints.Ordered](s S) E {
 	i := rand.Intn(len(s))
 	return s[i]
+}
+
+func ChooseWithWeights[S ~[]E, E constraints.Ordered](s S, weights []uint) E {
+	var choices []wr.Choice
+	for i := range s {
+		choices = append(choices, wr.Choice{Item: s[i], Weight: weights[i]})
+	}
+	chooser, _ := wr.NewChooser(choices...)
+	return chooser.Pick()
 }

@@ -32,6 +32,17 @@ const (
 	CharacterSexualityAsexual      = 4
 )
 
+var (
+	CharacterSexualities = []uint8{
+		CharacterSexualityHeterosexual,
+		CharacterSexualityHomosexual,
+		CharacterSexualityBisexual,
+		CharacterSexualityAsexual,
+	}
+
+	CharacterSexualitiesWeights = []uint{10, 4, 1, 1}
+)
+
 func NewCharacter(name, gender string) *Character {
 	return &Character{Name: name, Gender: gender, Race: CharacterRaceDefault}
 }

@@ -3,6 +3,7 @@ module github.com/AlexSafatli/Saber
 go 1.18
 
 require (
+	github.com/mroth/weightedrand v0.4.2-0.20211204162730-e5a5e1b52040
 	github.com/spf13/cobra v1.2.1
 	go.mongodb.org/mongo-driver v1.8.0
 	golang.org/x/exp v0.0.0-20220609121020-a51bd0440498
