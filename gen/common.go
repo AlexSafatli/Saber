@@ -1,9 +1,11 @@
 package gen
 
 import (
+	"github.com/AlexSafatli/Saber/rng"
 	"math/rand"
-	"time"
 )
+
+var r rand.Rand
 
 const (
 	seedReductionAmt = 40
@@ -31,7 +33,7 @@ func (p *Possibility) Increase() {
 }
 
 func Reseed() {
-	rand.Seed(int64(time.Now().Nanosecond()))
+	r = rng.New()
 }
 
 func NewPossibility() *Possibility {
@@ -39,7 +41,7 @@ func NewPossibility() *Possibility {
 }
 
 func randPercentile() uint {
-	return uint(rand.Int63n(100) << 1 >> 1)
+	return uint(r.Int63n(100) << 1 >> 1)
 }
 
 func min(a, b int) int {

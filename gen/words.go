@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"github.com/AlexSafatli/Saber/rng"
 	"go.mongodb.org/mongo-driver/bson/primitive"
-	"math/rand"
 	"strings"
 )
 
@@ -75,7 +74,7 @@ func (l *Language) Word() string {
 	diff := int(l.MaxSyllables - l.MinSyllables)
 	min := int(l.MinSyllables)
 	if diff > 0 {
-		a = rand.Intn(diff + 1)
+		a = r.Intn(diff + 1)
 	}
 	if min > 0 {
 		b = min
@@ -92,7 +91,7 @@ func (l *Language) Name() string {
 }
 
 func GenerateLanguage() *Language {
-	minSyl := int8(rand.Intn(2) + 2)
+	minSyl := int8(r.Intn(2) + 2)
 	p := &Phonemes{
 		Consonants: rng.Choose(ConsonantPresets),
 		Vowels:     rng.Choose(VowelPresets),
@@ -102,7 +101,7 @@ func GenerateLanguage() *Language {
 		Phonemes:     p,
 		Structure:    rng.Choose(SyllableStructures),
 		MinSyllables: minSyl,
-		MaxSyllables: int8(rand.Intn(2)+1) + minSyl,
+		MaxSyllables: int8(r.Intn(2)+1) + minSyl,
 	}
 }
 

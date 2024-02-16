@@ -3,7 +3,6 @@ package gen
 import (
 	"bufio"
 	"bytes"
-	"math/rand"
 	"os"
 	"path/filepath"
 	"strconv"
@@ -44,31 +43,31 @@ func NewRandomTable(path string) (RandomTable, error) {
 	return r, nil
 }
 
-func (r *RandomTable) Roll() string {
-	if r.max == r.min && r.min == 0 {
+func (rt *RandomTable) Roll() string {
+	if rt.max == rt.min && rt.min == 0 {
 		return ""
 	}
-	roll := rand.Intn(r.max-r.min) + r.min
+	roll := r.Intn(rt.max-rt.min) + rt.min
 	var closest int
-	for k := range r.Values {
+	for k := range rt.Values {
 		if roll > k {
 			closest = k
 		} else {
 			break
 		}
 	}
-	return r.Values[closest]
+	return rt.Values[closest]
 }
 
-func (r *RandomTable) Parse(path string) error {
+func (rt *RandomTable) Parse(path string) error {
 	f, err := os.Open(path)
 	if err != nil {
 		return err
 	}
 	defer closeTableFile(f)
 	base := filepath.Base(path)
-	r.Name = base[0 : len(base)-len(filepath.Ext(path))]
-	r.Values = make(map[int]string)
+	rt.Name = base[0 : len(base)-len(filepath.Ext(path))]
+	rt.Values = make(map[int]string)
 	scanner := bufio.NewScanner(f)
 	for scanner.Scan() {
 		// Parse table data.
@@ -89,9 +88,9 @@ func (r *RandomTable) Parse(path string) error {
 			continue
 		}
 		valueIndex := strings.Index(s, fields[2])
-		r.min = min(r.min, rollMin)
-		r.max = max(r.max, rollMax)
-		r.Values[rollMin] = formatRandomTableString(s[valueIndex:])
+		rt.min = min(rt.min, rollMin)
+		rt.max = max(rt.max, rollMax)
+		rt.Values[rollMin] = formatRandomTableString(s[valueIndex:])
 	}
 	if err = scanner.Err(); err != nil {
 		return err

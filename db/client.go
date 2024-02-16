@@ -15,12 +15,8 @@ const (
 )
 
 func Connect() (*mongo.Client, context.Context, error) {
-	client, err := mongo.NewClient(options.Client().ApplyURI(os.Getenv("MONGODB_URI")))
-	if err != nil {
-		return nil, nil, err
-	}
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Second)
-	err = client.Connect(ctx)
+	client, err := mongo.Connect(ctx, options.Client().ApplyURI(os.Getenv("MONGODB_URI")))
 	if err != nil {
 		return nil, nil, err
 	}

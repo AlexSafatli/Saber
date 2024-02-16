@@ -1,17 +1,15 @@
 package rng
 
-import "math/rand"
-
 const MaxSmallNumber = 5
 
 func RandomIndex(end int) int {
-	return rand.Intn(end)
+	return rng.Intn(end)
 }
 
 func RandomSmallNumber() int {
-	return rand.Intn(MaxSmallNumber)
+	return rng.Intn(MaxSmallNumber)
 }
 
 func RandomBoolean() bool {
-	return rand.Intn(2) == 1
+	return rng.Intn(2) == 1
 }
